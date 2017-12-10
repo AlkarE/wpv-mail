@@ -11,6 +11,10 @@ Author: Alkar. E.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 } 
+
+if(!valid_wp_core()) {
+	wp_die( __('This plugin requires WP version greater/equal 4.7') );
+}
 $wpv_error = array();
 $wpv_error['target_email'] = '';
 
@@ -95,7 +99,7 @@ function get_wpv_data( WP_REST_Request $request ){
 	if( !is_object($wpv_data)  ){
 		return new WP_Error( 'WPV data', 'Wrong format', array( 'status' => 500 ) );
 	}
-	
+
 	if( !isset($wpv_data) ) {
 		return new WP_Error( 'WPV data', 'Data missing', array( 'status' => 500 ) );
 	}	
@@ -181,5 +185,10 @@ function valid_wp_core(){
 	};
 }
 
+function uninstall_wpv_mail(){
+	delete_option('wpv_target_email');
+}
+
+register_deactivation_hook(__FILE__, 'uninstall_wpv_mail');
 
 ?>
