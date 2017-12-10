@@ -189,6 +189,6 @@ function uninstall_wpv_mail(){
 	delete_option('wpv_target_email');
 }
 
-register_deactivation_hook(__FILE__, 'uninstall_wpv_mail');
+register_uninstall_hook(__FILE__, 'uninstall_wpv_mail');
 
 ?>
