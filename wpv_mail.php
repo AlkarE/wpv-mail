@@ -15,6 +15,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 if(!valid_wp_core()) {
 	wp_die( __('This plugin requires WP version greater/equal 4.7') );
 }
+
+register_uninstall_hook(__FILE__, 'uninstall_wpv_mail');
+
 $wpv_error = array();
 $wpv_error['target_email'] = '';
 
@@ -189,6 +192,6 @@ function uninstall_wpv_mail(){
 	delete_option('wpv_target_email');
 }
 
-register_uninstall_hook(__FILE__, 'uninstall_wpv_mail');
+
 
 ?>
